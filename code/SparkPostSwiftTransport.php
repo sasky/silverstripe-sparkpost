@@ -51,6 +51,12 @@ class SparkPostSwiftTransport implements Swift_Transport
      * @var boolean
      */
     protected $isStarted = false;
+    
+    private static $dependencies = [
+        'logger' => '%$Psr\Log\LoggerInterface',
+    ];
+
+    public $logger;
 
     public function __construct(SparkPostApiClient $client)
     {
@@ -309,8 +315,7 @@ class SparkPostSwiftTransport implements Swift_Transport
             return array($original_to, $subject, $htmlContent, $customheaders);
         }
 
-        $logLevel = self::config()->log_level ? self::config()->log_level : 7;
-
+       
         try {
             $result = $this->getClient()->createTransmission($params);
 
@@ -318,10 +323,10 @@ class SparkPostSwiftTransport implements Swift_Transport
                 return [$original_to, $subject, $htmlContent, $customheaders, $result];
             }
 
-            SS_Log::log("No recipient was accepted for transmission " . $result['id'], $logLevel);
+            $this->logger->notice("No recipient was accepted for transmission " . $result['id']);
         } catch (Exception $ex) {
             $this->lastException = $ex;
-            SS_Log::log($ex->getMessage(), $logLevel);
+            $this->logger->notice($ex->getMessage());
         }
 
         return false;
