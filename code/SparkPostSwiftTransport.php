@@ -400,7 +400,15 @@ class SparkPostSwiftTransport implements Swift_Transport
 
         $fromAddresses = $message->getFrom();
         $fromEmails = array_keys($fromAddresses);
-        list($fromFirstEmail, $fromFirstName) = each($fromAddresses);
+        // get the first key and Value out of $fromAddresses
+        // which what this was doing
+        //list($fromFirstEmail, $fromFirstName) = each($fromAddresses);
+        // but updated for php7.2
+        foreach ($fromAddresses as $key => $value) {
+            $fromFirstEmail = $key;
+            $fromFirstName = $value ? $value : ''; 
+            break;
+        }
         $this->fromEmail = $fromFirstEmail;
 
         $toAddresses = $message->getTo();
