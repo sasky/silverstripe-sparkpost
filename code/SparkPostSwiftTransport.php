@@ -406,7 +406,7 @@ class SparkPostSwiftTransport implements Swift_Transport
         // but updated for php7.2
         foreach ($fromAddresses as $key => $value) {
             $fromFirstEmail = $key;
-            $fromFirstName = $value ? $value : ''; 
+            $fromFirstName = $value; 
             break;
         }
         $this->fromEmail = $fromFirstEmail;
