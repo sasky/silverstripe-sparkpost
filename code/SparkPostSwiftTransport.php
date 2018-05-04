@@ -499,7 +499,6 @@ class SparkPostSwiftTransport implements Swift_Transport
 
         $sparkPostMessage = array(
             'recipients' => $recipients,
-            'reply_to' => $reply_to,
             'inline_css' => $inlineCss,
             'tags' => $tags,
             'content' => array(
@@ -510,6 +509,7 @@ class SparkPostSwiftTransport implements Swift_Transport
                 'subject' => $message->getSubject(),
                 'html' => $bodyHtml,
                 'text' => $bodyText,
+                'reply_to' => $reply_to,
             ),
         );
 
