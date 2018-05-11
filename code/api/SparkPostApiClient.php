@@ -966,8 +966,8 @@ class SparkPostApiClient
                         if (!is_array($data)) {
                             $data = json_decode($data, JSON_OBJECT_AS_ARRAY);
                         }
-                        if (isset($data['content']['from'])) {
-                            $from = $data['content']['from'];
+                        if (isset($data['content']['from']['email')) {
+                            $from = $data['content']['from']['email'];
                         }
                         if ($from) {
                             $domain = substr(strrchr($from, "@"), 1);
