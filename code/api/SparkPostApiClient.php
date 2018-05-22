@@ -120,8 +120,8 @@ class SparkPostApiClient
     public function getDefaultCurlOptions()
     {
         return [
-            'connect_timeout' => 10,
-            'timeout' => 10,
+            'connect_timeout' => 60,
+            'timeout' => 60,
             'verbose' => false,
         ];
     }
